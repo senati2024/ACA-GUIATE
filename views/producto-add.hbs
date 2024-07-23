@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css">
+    <title>Agregar Producto</title>
+</head>
+<body>
+  <h1>Agregar Nuevo Producto</h1>
+  <form action="/productos/add" method="post" enctype="multipart/form-data">
+    <label for="nombreproducto">Nombre:</label><br>
+    <input type="text" id="nombreproducto" name="nombreproducto" required><br><br>
+    <label for="idmarca">Marca:</label><br>
+    <select id="idmarca" name="idmarca" required><br>
+      {{#each marcas}}
+        <option value="{{idmarca}}" {{#if (eq idmarca ../producto.idmarca)}}selected{{/if}}>{{nombremarca}}</option>
+      {{/each}}
+    </select><br><br>
+    <label for="idcategoria">Categoría:</label><br>
+    <select id="idcategoria" name="idcategoria" required><br><br>
+      {{#each categorias}}
+        <option value="{{idcategoria}}" {{#if (eq idcategoria ../producto.idcategoria)}}selected{{/if}}>{{nombrecategoria}}</option>
+      {{/each}}
+    </select><br><br>
+    <label for="precioventa">Precio:</label><br>
+    <input type="number" id="precioventa" name="precioventa" step="0.01" min="0" required><br><br>
+    <label for="imagen">Imagen:</label><br>
+    <input type="file" id="imagen" name="imagen"><br><br>
+    <button type="submit">Agregar Producto</button>
+  </form>
+</body>
+</html>

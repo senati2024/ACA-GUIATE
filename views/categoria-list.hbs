@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css">
+    <title>Categorías</title>
+</head>
+<body>
+    <h1>Gestión de Categorías</h1>
+
+    <!-- Formulario para agregar una nueva categoría -->
+    <form action="/categorias" method="post">
+        <label for="nombrecategoria">Nombre de la Categoría:</label>
+        <input type="text" id="nombrecategoria" name="nombrecategoria" required>
+        <button type="submit">Agregar Nueva Categoría</button>
+    </form>
+
+    <br><br>
+
+    <table style="border: 1px solid black; border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th style="border: 1px solid black;">ID</th>
+                <th style="border: 1px solid black;">Nombre</th>
+                <th style="border: 1px solid black;">Editar</th>
+                <th style="border: 1px solid black;">Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each categorias}}
+            <tr>
+                <td style="border: 1px solid black;">{{idcategoria}}</td>
+                <td style="border: 1px solid black;">{{nombrecategoria}}</td>
+                <td style="border: 1px solid black;">
+                    <a href="/categorias/edit/{{idcategoria}}">Editar</a>
+                </td>
+                <td style="border: 1px solid black;">
+                    <form action="/categorias/delete/{{idcategoria}}" method="post">
+                        <button type="submit">Eliminar</button>
+                    </form>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</body>
+</html>

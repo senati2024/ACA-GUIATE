@@ -1,8 +1,7 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-
-import { Usuario } from './models/usuario.model';
+import { AppService } from './app.service';
 import { Producto } from './models/producto.model';
 import { Marca } from './models/marca.model';
 import { Categoria } from './models/categoria.model';
@@ -17,6 +16,7 @@ import { MarcaController } from './marca/marca.controller';
 import { MarcaService } from './marca/marca.service';
 
 import { AuthModule } from './auth/auth.module';
+import { AppController } from './app/app.controller';
 
 @Module({
   imports: [
@@ -36,13 +36,24 @@ import { AuthModule } from './auth/auth.module';
         database: configService.get('DB_DATABASE'),
         autoLoadModels: true,
         synchronize: true,
-        models: [Usuario, Producto, Marca, Categoria],
+        models: [Producto, Marca, Categoria],
       }),
     }),
-    SequelizeModule.forFeature([Usuario, Producto, Marca, Categoria]),
+    SequelizeModule.forFeature([Producto, Marca, Categoria]),
     AuthModule,
   ],
-  controllers: [ProductoController, CategoriaController, MarcaController],
-  providers: [ProductoService, CategoriaService, MarcaService],
+  controllers: [
+    AppController,
+    ProductoController,
+    CategoriaController,
+    MarcaController,
+  ],
+  providers: [
+    AppService,
+    ProductoService,
+    CategoriaService,
+    MarcaService,
+  ],
 })
 export class AppModule {}
+

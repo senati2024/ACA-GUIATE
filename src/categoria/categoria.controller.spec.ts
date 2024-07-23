@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { CategoriaController } from './categoria.controller';
 import { CategoriaService } from './categoria.service';
+import { CreateCategoriaDto } from './dto/create-categoria.dto';
 
 describe('CategoriaController', () => {
   let controller: CategoriaController;
@@ -33,7 +34,7 @@ describe('CategoriaController', () => {
   });
 
   it('should create a new categoria', async () => {
-    const dto = { idCategoria: 1, NombreCategoria: 'Test' };
+    const dto: CreateCategoriaDto = { nombrecategoria: 'Test' };
     await expect(controller.create(dto)).resolves.toEqual({});
   });
 });

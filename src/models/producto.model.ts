@@ -1,26 +1,30 @@
-import { Column, Model, Table, ForeignKey } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { Marca } from './marca.model';
 import { Categoria } from './categoria.model';
 
-@Table({ tableName: 'producto' })
+@Table({ tableName: 'producto', timestamps: false })
 export class Producto extends Model<Producto> {
-  @Column({ primaryKey: true })
+  @Column({ primaryKey: true, autoIncrement: true, type: DataType.INTEGER })
   idproducto: number;
 
-  @Column
+  @Column({ type: DataType.STRING(255) })
   nombreproducto: string;
 
   @ForeignKey(() => Marca)
-  @Column
+  @Column({ type: DataType.INTEGER })
   idmarca: number;
+  @BelongsTo(() => Marca)
+  marca: Marca;
 
   @ForeignKey(() => Categoria)
-  @Column
+  @Column({ type: DataType.INTEGER })
   idcategoria: number;
+  @BelongsTo(() => Categoria)
+  categoria: Categoria;
 
-  @Column
+  @Column({ type: DataType.STRING(255) })
   imagen: string;
 
-  @Column
+  @Column({ type: DataType.DECIMAL(10,2) })
   precioventa: number;
 }

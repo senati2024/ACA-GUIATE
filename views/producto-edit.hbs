@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css">
+    <title>Editar Producto</title>
+</head>
+<body>
+  <h1>Editar Producto</h1>
+  <form action="/productos/edit/{{producto.idproducto}}" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="_method" value="post">
+    <label for="nombreproducto">Nombre:</label><br>
+    <input type="text" id="nombreproducto" name="nombreproducto" value="{{producto.nombreproducto}}" required><br><br>
+    <label for="idmarca">Marca:</label><br>
+    <select id="idmarca" name="idmarca" required><br>
+      {{#each marcas}}
+        <option value="{{this.idmarca}}" {{#if (eq this.idmarca ../producto.idmarca)}}selected{{/if}}>{{this.nombremarca}}</option>
+      {{/each}}
+    </select><br><br>
+    <label for="idcategoria">Categoría:</label><br>
+    <select id="idcategoria" name="idcategoria" required>
+      {{#each categorias}}
+        <option value="{{this.idcategoria}}" {{#if (eq this.idcategoria ../producto.idcategoria)}}selected{{/if}}>{{this.nombrecategoria}}</option>
+      {{/each}}
+    </select><br><br>
+    <label for="precioventa">Precio:</label><br>
+    <input type="number" id="precioventa" name="precioventa" value="{{producto.precioventa}}" step="0.01" min="0" required><br><br>
+    <label for="imagen">Imagen:</label><br>
+    <input type="file" id="imagen" name="imagen"><br><br>
+    <button type="submit">Actualizar Producto</button>
+  </form>
+</body>
+</html>

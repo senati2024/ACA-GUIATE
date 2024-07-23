@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/main.css">
+    <title>Editar Categoría</title>
+</head>
+<body>
+    <h1>Editar Categoría</h1>
+
+    <form action="/categorias/edit/{{categoria.idcategoria}}" method="post">
+        <label for="nombrecategoria">Nombre de la Categoría:</label>
+        <input type="text" id="nombrecategoria" name="nombrecategoria" value="{{categoria.nombrecategoria}}" required>
+        <button type="submit">Guardar Cambios</button>
+    </form>
+
+    <a href="/categorias">Volver a la lista de categorías</a>
+</body>
+</html>

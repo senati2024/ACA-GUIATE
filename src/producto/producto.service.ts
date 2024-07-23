@@ -1,6 +1,11 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Producto } from '../models/producto.model';
+import { Marca } from '../models/marca.model';
+import { Categoria } from '../models/categoria.model';
+import { CreateProductoDto } from './dto/create-producto.dto';
+import { UpdateProductoDto } from './dto/update-producto.dto';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class ProductoService {
@@ -9,34 +14,68 @@ export class ProductoService {
     private readonly productoModel: typeof Producto,
   ) {}
 
-  findAll(): Promise<Producto[]> {
-    return this.productoModel.findAll();
+  async findAllWithDetails(search?: string, marca?: string, categoria?: string): Promise<Producto[]> {
+    const whereClause: any = {};
+    
+    if (search) {
+      whereClause.nombreproducto = { [Op.iLike]: `%${search}%` };
+    }
+    
+    if (marca) {
+      whereClause.idmarca = marca;
+    }
+    
+    if (categoria) {
+      whereClause.idcategoria = categoria;
+    }
+  
+    return this.productoModel.findAll({
+      where: whereClause,
+      include: [
+        {
+          model: Marca,
+          as: 'marca',
+        },
+        {
+          model: Categoria,
+          as: 'categoria',
+        },
+      ],
+    });
   }
 
-  async findOne(id: number): Promise<Producto> {
+  async findOne(id: string): Promise<Producto> {
+    return this.productoModel.findByPk(id, {
+      include: [
+        {
+          model: Marca,
+          as: 'marca',
+        },
+        {
+          model: Categoria,
+          as: 'categoria',
+        },
+      ],
+    });
+  }
+
+  async create(createProductoDto: CreateProductoDto): Promise<Producto> {
+    return this.productoModel.create(createProductoDto);
+  }
+  
+  async update(id: string, updateProductoDto: UpdateProductoDto) {
     const producto = await this.productoModel.findByPk(id);
     if (!producto) {
-      throw new NotFoundException('Producto no encontrado');
+      throw new Error('Product not found');
     }
-    return producto;
+    return producto.update(updateProductoDto);
   }
 
-  create(producto: Producto): Promise<Producto> {
-    return this.productoModel.create(producto);
-  }
-
-  async update(id: number, producto: Producto): Promise<Producto> {
-    const productoExistente = await this.findOne(id);
-    productoExistente.nombreproducto = producto.nombreproducto;
-    productoExistente.idmarca = producto.idmarca;
-    productoExistente.idcategoria = producto.idcategoria;
-    productoExistente.imagen = producto.imagen;
-    productoExistente.precioventa = producto.precioventa;
-    return productoExistente.save();
-  }
-
-  async remove(id: number): Promise<void> {
-    const producto = await this.findOne(id);
+  async remove(id: string): Promise<void> {
+    const producto = await this.productoModel.findByPk(id);
+    if (!producto) {
+      throw new Error('Product not found');
+    }
     await producto.destroy();
   }
 }

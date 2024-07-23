@@ -1,0 +1,19 @@
+{{#each productos}}
+<li>
+    <img src="/uploads/{{this.imagen}}" alt="{{this.nombreproducto}}" />
+    <div>
+        <h2>{{this.nombreproducto}}</h2>
+        <p>Marca: {{this.marca.nombremarca}}</p>
+        <p>Categoria: {{this.categoria.nombrecategoria}}</p>
+        <p>S/.{{this.precioventa}}</p>
+        <form action="/productos/edit/{{this.idproducto}}" style="display:inline;">
+            <input type="hidden" name="_method" value="EDIT">
+            <button type="submit">Editar</button>
+        </form>
+        <form action="/productos/{{this.idproducto}}" method="POST" style="display:inline;">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit">Eliminar</button>
+        </form>
+    </div>
+</li>
+{{/each}}
