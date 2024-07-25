@@ -1,0 +1,7 @@
+<!-- src/app/product-form/product-form.component.html -->
+<form (ngSubmit)="submitForm()">
+  <label for="productName">Product Name:</label>
+  <input id="productName" [(ngModel)]="product.name" name="name" required>
+  <!-- otros campos del formulario -->
+  <button type="submit">Submit</button>
+</form>

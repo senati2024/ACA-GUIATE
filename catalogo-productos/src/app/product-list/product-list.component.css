@@ -1,0 +1,33 @@
+/* product-list.component.css */
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    background-color: #f5f5f5; /* Color de fondo para prueba */
+  }
+  
+  .product-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    width: 200px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .product-card h2 {
+    font-size: 1.2em;
+    margin: 10px 0;
+  }
+  
+  .product-card p {
+    color: #333;
+  }
+  
