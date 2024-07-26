@@ -21,12 +21,26 @@
       "ES2022",
       "dom"
     ]
+    
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
+  "files": [
+    "src/main.ts",
+    "polyfills.ts"  // Asegúrate de agregar esta línea
+  ],
+  "include": [
+    "src/**/*.ts", // Incluye solo archivos TypeScript en la carpeta src
+    "polyfills.ts"
+  ],
+  "exclude": [
+    "src/app/app.config.server.ts",
+    "src/main.server.ts",
+    "server.ts"
+  ]
 }
 

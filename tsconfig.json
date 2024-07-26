@@ -20,5 +20,13 @@
     "paths": {
       "*": ["src/*"]
     }
-  }
+  },
+  "include": [
+    "src/**/*.ts"  // Incluye solo archivos TypeScript en la carpeta src
+  ],
+  "exclude": [
+    "src/app/app.config.server.ts",
+    "src/main.server.ts",
+    "server.ts"
+  ]
 }

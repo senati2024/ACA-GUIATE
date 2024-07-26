@@ -27,5 +27,6 @@ async function bootstrap() {
   app.useStaticAssets(join(__dirname, '..', 'uploads'), { prefix: '/uploads' });
 
   await app.listen(3000);
+  console.log('Server running on http://localhost:3000');
 }
 bootstrap();

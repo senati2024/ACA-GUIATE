@@ -1,25 +1,55 @@
-// src/app/product-form/product-form.component.ts
-import { Component, EventEmitter, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { ProductService } from '../services/product.services';
+import { Product } from '../models/product.model';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-form',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.css']
 })
-export class ProductFormComponent {
-  @Output() productSubmitted = new EventEmitter<any>();
-
-  product = {
-    name: '',
-    // otros campos del producto
+export class ProductFormComponent implements OnInit {
+  product: Product = {
+    idProducto: 0,
+    NombreProducto: '',
+    idMarca: 0,
+    idCategoria: 0,
+    imagen: '',
+    PrecioVenta: 0
   };
 
-  submitForm() {
-    // Lógica para manejar el envío del formulario
-    this.productSubmitted.emit(this.product);
+  isEditMode: boolean = false;
+
+  constructor(
+    private productService: ProductService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      const id = +params.get('id')!;
+      if (id) {
+        this.isEditMode = true;
+        this.productService.getProductById(id).subscribe(
+          (product: Product) => this.product = product,
+          error => console.error('Error fetching product', error)
+        );
+      }
+    });
+  }
+
+  onSubmit(): void {
+    if (this.isEditMode) {
+      this.productService.updateProduct(this.product.idProducto, this.product).subscribe(
+        () => this.router.navigate(['/productos']),
+        error => console.error('Error updating product', error)
+      );
+    } else {
+      this.productService.createProduct(this.product).subscribe(
+        () => this.router.navigate(['/productos']),
+        error => console.error('Error creating product', error)
+      );
+    }
   }
 }

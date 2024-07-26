@@ -1,7 +1,26 @@
-<!-- src/app/product-form/product-form.component.html -->
-<form (ngSubmit)="submitForm()">
-  <label for="productName">Product Name:</label>
-  <input id="productName" [(ngModel)]="product.name" name="name" required>
-  <!-- otros campos del formulario -->
-  <button type="submit">Submit</button>
-</form>
+<div class="container">
+  <h2>{{ isEditMode ? 'Editar Producto' : 'Agregar Nuevo Producto' }}</h2>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="nombre">Nombre del Producto</label>
+      <input type="text" id="nombre" name="NombreProducto" [(ngModel)]="product.NombreProducto" required>
+    </div>
+    <div class="form-group">
+      <label for="marca">Marca</label>
+      <input type="number" id="marca" name="idMarca" [(ngModel)]="product.idMarca" required>
+    </div>
+    <div class="form-group">
+      <label for="categoria">Categoría</label>
+      <input type="number" id="categoria" name="idCategoria" [(ngModel)]="product.idCategoria" required>
+    </div>
+    <div class="form-group">
+      <label for="imagen">Imagen</label>
+      <input type="text" id="imagen" name="imagen" [(ngModel)]="product.imagen" required>
+    </div>
+    <div class="form-group">
+      <label for="precio">Precio de Venta</label>
+      <input type="number" id="precio" name="PrecioVenta" [(ngModel)]="product.PrecioVenta" required>
+    </div>
+    <button type="submit">Guardar</button>
+  </form>
+</div>

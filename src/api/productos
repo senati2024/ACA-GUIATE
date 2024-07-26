@@ -1,0 +1,16 @@
+const express = require('express');
+const app = express();
+
+// Mock data
+const products = [
+  { idProducto: 1, NombreProducto: 'Producto 1', idMarca: 1, idCategoria: 1, imagen: '', PrecioVenta: 100 },
+  // más productos
+];
+
+app.get('/api/productos', (req, res) => {
+  res.json(products); // Asegúrate de que se envía JSON
+});
+
+app.listen(4200, () => {
+  console.log('Servidor corriendo en http://localhost:4200');
+});

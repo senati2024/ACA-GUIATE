@@ -1,19 +1,20 @@
 // src/app/app.component.ts
 import { Component } from '@angular/core';
-import { ProductFormComponent } from './product-form/product-form.component';
+import { RouterOutlet } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ProductFormComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  productData: any = {}; // Asegúrate de definir esta propiedad
+  title = 'Mi Aplicación Angular'; // Definir la propiedad 'title'
+  productData: any = {};
 
   handleProductSubmitted(product: any) {
-    // Lógica para manejar el producto enviado
     console.log(product);
   }
 }

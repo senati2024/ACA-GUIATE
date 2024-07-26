@@ -1,6 +1,18 @@
-<div>
-  <h2>Product List</h2>
-  <!-- Agrega aquí el contenido de la lista de productos -->
-</div>
+<div class="container">
+  <h2>Lista de Productos</h2>
+  <a routerLink="/producto-form">Agregar Nuevo Producto</a><br><br>
 
-  
+  <ul>
+    <li *ngFor="let product of products">
+      <img [src]="'/uploads/' + product.imagen" alt="{{product.nombreproducto}}" />
+      <div>
+        <h3>{{product.nombreproducto}}</h3>
+        <p>Marca: {{product.idMarca}}</p>
+        <p>Categoria: {{product.idCategoria}}</p>
+        <p>S/.{{product.precioventa}}</p>
+        <button (click)="deleteProduct(product.id)">Eliminar</button>
+        <a routerLink="/producto-form">Editar</a>
+      </div>
+    </li>
+  </ul>
+</div>
