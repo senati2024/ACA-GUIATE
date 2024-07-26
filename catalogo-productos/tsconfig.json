@@ -31,11 +31,11 @@
   },
   "files": [
     "src/main.ts",
-    "polyfills.ts"  // Asegúrate de agregar esta línea
+    "src/polyfills.ts"  // Asegúrate de agregar esta línea
   ],
   "include": [
     "src/**/*.ts", // Incluye solo archivos TypeScript en la carpeta src
-    "polyfills.ts"
+    "src/polyfills.ts"
   ],
   "exclude": [
     "src/app/app.config.server.ts",
