@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.services';
 import { Product } from '../models/product.model';
-import { Router, ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-product-form',
@@ -21,33 +21,28 @@ export class ProductFormComponent implements OnInit {
   isEditMode: boolean = false;
 
   constructor(
-    private productService: ProductService,
-    private router: Router,
-    private route: ActivatedRoute
+    private productService: ProductService
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      const id = +params.get('id')!;
-      if (id) {
-        this.isEditMode = true;
-        this.productService.getProductById(id).subscribe(
-          (product: Product) => this.product = product,
-          error => console.error('Error fetching product', error)
-        );
-      }
-    });
+    // Lógica de inicialización aquí si es necesario, pero sin usar ActivatedRoute.
+    // Si deseas cargar un producto por ID, podrías hacer una llamada directa
+    // al servicio sin depender del enrutamiento.
   }
 
   onSubmit(): void {
     if (this.isEditMode) {
       this.productService.updateProduct(this.product.idProducto, this.product).subscribe(
-        () => this.router.navigate(['/productos']),
+        () => {
+          // Manejo después de la actualización, sin redireccionar.
+        },
         error => console.error('Error updating product', error)
       );
     } else {
       this.productService.createProduct(this.product).subscribe(
-        () => this.router.navigate(['/productos']),
+        () => {
+          // Manejo después de la creación, sin redireccionar.
+        },
         error => console.error('Error creating product', error)
       );
     }

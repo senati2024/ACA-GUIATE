@@ -1,8 +1,12 @@
-<nav class="navbar">
-  <a href="/productos" class="nav-link">Productos</a>
-  <a href="product-form/product-form.component.html" class="nav-link">Agregar Producto</a>
-</nav>
+<div class="container">
+  <header>
 
-<footer class="footer">
-  © 2024 Mi Aplicación Angular
-</footer>
+    <nav class="navbar">
+      <button (click)="changeView('productList')" class="nav-link">Lista de Productos</button>
+      <button (click)="changeView('productForm')" class="nav-link">Agregar Producto</button>
+    </nav>
+  </header>
+  <main>
+
+  </main>
+</div>

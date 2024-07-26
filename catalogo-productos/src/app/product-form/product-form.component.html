@@ -1,6 +1,6 @@
 <div class="container">
   <h2>{{ isEditMode ? 'Editar Producto' : 'Agregar Nuevo Producto' }}</h2>
-  <form (ngSubmit)="onSubmit()">
+  <form (ngSubmit)="onSubmit()" #productForm="ngForm">
     <div class="form-group">
       <label for="nombre">Nombre del Producto</label>
       <input type="text" id="nombre" name="NombreProducto" [(ngModel)]="product.NombreProducto" required>
@@ -24,3 +24,4 @@
     <button type="submit">Guardar</button>
   </form>
 </div>
+
